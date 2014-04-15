@@ -8,8 +8,11 @@ my ($ifile, $n_split, $seed, $odir) = @ARGV;
 
 
 # For test
-$ifile = "test.fq"; # $ifile = "test.fastq";
-$n_split = 3;
+# $ifile = "test.fq"; # $ifile = "test.fastq";
+# $n_split = 3;
+if(!defined $n_split){
+	die "Error: The number of split is not defined!";
+}
 if(!defined $seed){
 	$seed = 1234;	
 }
@@ -23,12 +26,12 @@ srand $seed;
 
 
 # Opening output filehandles 
-$ifile =~ /\.(.+?)$/;
+$ifile =~ /\.([^.]+?)$/;
 my $extension = $1;
 my $catin = "cat";
 my $catout = "";
 if($extension =~ /(gz|gzip)/){
-	$ifile =~ /\.(.+?\..+?)$/;
+	$ifile =~ /\.([^.]+?\.[^.]+?)$/;
 	$extension = $1;
 	$catin = "gzip -cd"; # $cat = "zcat";
 	$catout = "| gzip -c ";
