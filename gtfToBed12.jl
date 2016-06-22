@@ -9,9 +9,9 @@
 # - If a transcript_id doesn't have start_codon or stop codon, thickStart and thickEnd is set to the value of chromEnd.
 
 # Test:
-	# (eRNA) [harukao@elwood000 GENCODE]$ grep ENSMUST00000070533 /home/myoshimura/160610_for_ozaki/Mouse_UCSC_mm10.Ensembl.bed                                                                                   
+	# $ grep ENSMUST00000070533 /home/myoshimura/160610_for_ozaki/Mouse_UCSC_mm10.Ensembl.bed                                                                                   
 # 	# chr1    3214481 3671498 ENSMUST00000070533      0       -       3216021 3671348 0       3       2487,200,947,   0,207220,456070,
-	# (eRNA) [harukao@n000 GENCODE]$ grep ENSMUST00000070533 gencode.vM9.annotation.bed
+	# $ grep ENSMUST00000070533 gencode.vM9.annotation.bed
 	# chr1    3214481 3671498 ENSMUST00000070533.4    0       -       3216021 3671348 0       3       2487,200,947,   0,207220,456070,
 
 function gtfToBed12(path_gtf, path_bed)
