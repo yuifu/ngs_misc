@@ -9,7 +9,7 @@
 # - If a transcript_id doesn't have start_codon or stop codon, thickStart and thickEnd is set to the value of chromEnd.
 
 # Test:
-	# $ grep ENSMUST00000070533 /home/myoshimura/160610_for_ozaki/Mouse_UCSC_mm10.Ensembl.bed                                                                                   
+	# $ grep ENSMUST00000070533 /home/myoshimura/160610_for_ozaki/Mouse_UCSC_mm10.Ensembl.bed
 # 	# chr1    3214481 3671498 ENSMUST00000070533      0       -       3216021 3671348 0       3       2487,200,947,   0,207220,456070,
 	# $ grep ENSMUST00000070533 gencode.vM9.annotation.bed
 	# chr1    3214481 3671498 ENSMUST00000070533.4    0       -       3216021 3671348 0       3       2487,200,947,   0,207220,456070,
@@ -21,14 +21,8 @@ function gtfToBed12(path_gtf, path_bed)
 	set_end = BitSet()
 	set_codon = BitSet()
 	strand = ""
-	# d_chr = Dict{AbstractString, AbstractString}()
-	# d_start = Dict{AbstractString, BitSet}()
-	# d_end = Dict{AbstractString, BitSet}()
-	# d_codon = Dict{AbstractString, BitSet}()
-	# d_strand = Dict{AbstractString, AbstractString}()
 
 	fw = open(path_bed, "w")
-
 
 	f = open(path_gtf)
 	for ln in eachline(f)
@@ -42,7 +36,7 @@ function gtfToBed12(path_gtf, path_bed)
 		end
 
 		new_transcript_id = match(r"transcript_id \"(.+?)\"", arr[9]).captures[1]
-		if transcript_id != new_transcript_id 
+		if transcript_id != new_transcript_id
 			if length(set_start) > 0
 				res = calcLine(chr, set_start, set_end, transcript_id, strand, set_codon)
 				write(fw, res * "\n")
@@ -100,12 +94,12 @@ function calcThickEnd(set_codon::BitSet, chromEnd)
 end
 
 function calcLine(
-					chr::AbstractString, set_start::BitSet, set_end::BitSet, 
+					chr::AbstractString, set_start::BitSet, set_end::BitSet,
 					transcript_id::AbstractString, strand::AbstractString,
 					set_codon::BitSet
 					)
 	chrom = chr
-	if length(set_start) == 0 
+	if length(set_start) == 0
 		print(transcript_id)
 	end
 
@@ -122,11 +116,11 @@ function calcLine(
 	blockStarts = calcBlockStarts(set_start, chromStart + 1)
 
 	res = join([
-				chrom; 
-				string(chromStart); 
-				string(chromEnd); 
-				name; 
-				string(score); 
+				chrom;
+				string(chromStart);
+				string(chromEnd);
+				name;
+				string(score);
 				strand;
 				string(thickStart);
 				string(thickEnd);
@@ -158,4 +152,3 @@ path_bed = ARGS[2]
 
 
 gtfToBed12(path_gtf, path_bed)
-
